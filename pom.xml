@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.jboss</groupId>
+        <artifactId>jboss-parent</artifactId>
+        <version>39</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>org.jboss.logging</groupId>
+    <artifactId>dev-tools</artifactId>
+    <name>JBoss Logging: Development Tools</name>
+    <version>1.0.0.Final-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <url>https://jboss.org</url>
+
+    <scm child.scm.connection.inherit.append.path="false" child.scm.developerConnection.inherit.append.path="false"
+         child.scm.url.inherit.append.path="false">
+        <connection>scm:git:git://github.com/jboss-logging/logging-dev-tools.git</connection>
+        <developerConnection>scm:git:git@github.com:jboss-logging/logging-dev-tools.git</developerConnection>
+        <url>https://github.com/jboss-logging/logging-dev-tools/tree/main/</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <developers>
+        <developer>
+            <name>James R. Perkins</name>
+            <email>jperkins@redhat.com</email>
+            <organization>Red Hat, Inc.</organization>
+            <organizationUrl>https://redhat.com</organizationUrl>
+        </developer>
+    </developers>
+
+    <licenses>
+        <license>
+            <name>Apache License 2.0</name>
+            <url>https://repository.jboss.org/licenses/apache-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <properties>
+        <version.release.plugin>3.0.0-M6</version.release.plugin>
+        <version.nexus.staging.maven.plugin>1.6.13</version.nexus.staging.maven.plugin>
+    </properties>
+
+    <modules>
+        <module>ide-config</module>
+        <module>parent-pom</module>
+    </modules>
+</project>
