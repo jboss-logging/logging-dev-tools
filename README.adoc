@@ -1,0 +1,9 @@
+= JBoss Logging Development Tools
+
+This project contains development tools for various JBoss Logging projects.
+
+The `org.jboss.logging:logging-parent` is a parent POM which adds minimal functionality to the
+`org.jboss:jboss-parent` POM.
+
+The `org.jboss.logging:ide-config` contains resources for Eclipse formatting configuration files.
+These can be used in your IDE as well as in the `net.revelc.code.formatter:formatter-maven-plugin`.
