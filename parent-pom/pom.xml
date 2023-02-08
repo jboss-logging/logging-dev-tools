@@ -53,7 +53,7 @@
         <maven.compiler.release>${maven.compiler.target}</maven.compiler.release>
 
         <version.surefire.plugin>3.0.0-M7</version.surefire.plugin>
-        <version.formatter.maven.plugin>2.21.0</version.formatter.maven.plugin>
+        <version.formatter.maven.plugin>2.22.0</version.formatter.maven.plugin>
         <version.impsort.maven.plugin>1.8.0</version.impsort.maven.plugin>
     </properties>
 
@@ -91,6 +91,7 @@
                         <configFile>eclipse-code-formatter.xml</configFile>
                         <configXmlFile>jboss-logging-xml.properties</configXmlFile>
                         <lineEnding>LF</lineEnding>
+                        <includeResources>true</includeResources>
                         <removeTrailingWhitespace>true</removeTrailingWhitespace>
                         <skip>${skipFormatting}</skip>
                     </configuration>
@@ -101,17 +102,6 @@
                                 <goal>format</goal>
                             </goals>
                             <phase>process-sources</phase>
-                        </execution>
-                        <execution>
-                            <id>format-resources</id>
-                            <phase>process-resources</phase>
-                            <goals>
-                                <goal>format</goal>
-                            </goals>
-                            <configuration>
-                                <sourceDirectory>${project.basedir}/src/main/resources</sourceDirectory>
-                                <testSourceDirectory>${project.basedir}/src/test/resources</testSourceDirectory>
-                            </configuration>
                         </execution>
                     </executions>
                 </plugin>
