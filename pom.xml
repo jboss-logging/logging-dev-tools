@@ -14,7 +14,7 @@
     <groupId>org.jboss.logging</groupId>
     <artifactId>dev-tools</artifactId>
     <name>JBoss Logging: Development Tools</name>
-    <version>1.0.1.Final</version>
+    <version>1.0.2.Final-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <url>https://jboss.org</url>
