@@ -1,0 +1,136 @@
+name: JBoss Logging Development Tools CI Build
+
+on:
+    push:
+        branches:
+            - "*"
+        paths:
+            - '**/pom.xml'
+            - 'ide-config/**'
+            - '.github/workflows/**'
+    pull_request:
+        paths:
+            - '**/pom.xml'
+            - 'ide-config/**'
+            - '.github/workflows/**'
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        name: build
+
+        steps:
+            - name: Check out project
+              uses: actions/checkout@v4
+              with:
+                  path: logging-dev-tools
+
+            - name: Set up the JDKs
+              uses: actions/setup-java@v4
+              with:
+                  distribution: temurin
+                  architecture: x64
+                  java-version: |
+                      11
+                      17
+
+            - name: Install the snapshot
+              run: |
+                  cd logging-dev-tools
+                  mvn -B -ntp install
+
+            - name: Check out JBoss Logging
+              uses: actions/checkout@v4
+              with:
+                  repository: jboss-logging/jboss-logging
+                  path: jboss-logging
+            - name: Test JBoss Logging with updated parent
+              run: |
+                  cd jboss-logging
+                  mvn -B -ntp versions:update-parent -DallowSnapshots=true -N
+                  git diff pom.xml
+                  mvn -B -ntp install -Djava11.home=${{env.JAVA_HOME_11_X64}}
+
+            - name: Check out JBoss Logging Tools
+              uses: actions/checkout@v4
+              with:
+                  repository: jboss-logging/jboss-logging-tools
+                  path: jboss-logging-tools
+            - name: Test JBoss Logging with updated parent
+              run: |
+                  cd jboss-logging-tools
+                  mvn -B -ntp versions:update-parent -DallowSnapshots=true -N
+                  git diff pom.xml
+                  mvn -B -ntp install -Djava11.home=${{env.JAVA_HOME_11_X64}}
+
+            - name: Check out JBoss Log Manager
+              uses: actions/checkout@v4
+              with:
+                  repository: jboss-logging/jboss-logmanager
+                  path: jboss-logmanager
+            - name: Test JBoss Log Manager with updated parent
+              run: |
+                  cd jboss-logmanager
+                  mvn -B -ntp versions:update-parent -DallowSnapshots=true -N
+                  git diff pom.xml
+                  mvn -B -ntp install -Djava11.home=${{env.JAVA_HOME_11_X64}}
+
+            - name: Check out JBoss Log Manager log4j2
+              uses: actions/checkout@v4
+              with:
+                  repository: jboss-logging/log4j2-jboss-logmanager
+                  path: log4j2-jboss-logmanager
+            - name: Test JBoss Log Manager log4j2 with updated parent
+              run: |
+                  cd log4j2-jboss-logmanager
+                  mvn -B -ntp versions:update-parent -DallowSnapshots=true -N
+                  git diff pom.xml
+                  mvn -B -ntp install -Djava11.home=${{env.JAVA_HOME_11_X64}}
+
+            - name: Check out JBoss Log Manager slf4j
+              uses: actions/checkout@v4
+              with:
+                  repository: jboss-logging/slf4j-jboss-logmanager
+                  path: slf4j-jboss-logmanager
+            - name: Test JBoss Log Manager slf4j with updated parent
+              run: |
+                  cd slf4j-jboss-logmanager
+                  mvn -B -ntp versions:update-parent -DallowSnapshots=true -N
+                  git diff pom.xml
+                  mvn -B -ntp install -Djava11.home=${{env.JAVA_HOME_11_X64}}
+
+            - name: Check out JBoss Logging slf4j
+              uses: actions/checkout@v4
+              with:
+                  repository: jboss-logging/slf4j-jboss-logging
+                  path: slf4j-jboss-logging
+            - name: Test JBoss Logging slf4j with updated parent
+              run: |
+                  cd slf4j-jboss-logging
+                  mvn -B -ntp versions:update-parent -DallowSnapshots=true -N
+                  git diff pom.xml
+                  mvn -B -ntp install -Djava11.home=${{env.JAVA_HOME_11_X64}}
+
+            - name: Check out JBoss Logging - Commons Logging
+              uses: actions/checkout@v4
+              with:
+                  repository: jboss-logging/commons-logging-jboss-logging
+                  path: commons-logging-jboss-logging
+            - name: Test JBoss Logging - Commons Logging with updated parent
+              run: |
+                  cd commons-logging-jboss-logging
+                  mvn -B -ntp versions:update-parent -DallowSnapshots=true -N
+                  git diff pom.xml
+                  mvn -B -ntp install -Djava11.home=${{env.JAVA_HOME_11_X64}}
+
+            - name: Check out JBoss Logging - Commons Log Manager
+              uses: actions/checkout@v4
+              with:
+                  repository: jboss-logging/commons-logging-jboss-logmanager
+                  path: commons-logging-jboss-logmanager
+            - name: Test JBoss Logging - Commons Log Manager with updated parent
+              run: |
+                  cd commons-logging-jboss-logmanager
+                  mvn -B -ntp versions:update-parent -DallowSnapshots=true -N
+                  git diff pom.xml
+                  mvn -B -ntp install -Djava11.home=${{env.JAVA_HOME_11_X64}}
